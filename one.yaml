@@ -1,0 +1,62 @@
+images:
+  aws: dnxsolutions/aws:2.1.6-dnx1
+  azure: dnxsolutions/docker-aws-azure-ad:latest
+  gsuite: dnxsolutions/aws-google-auth:0.0.37-dnx2
+  terraform: dnxsolutions/terraform:0.14.5-dnx1
+
+required_version: ">= 0.7.2"
+
+plugins:
+  dnx-assume:
+    package: one-cli-plugin-dnx-assume==0.1.3
+    module: "plugin_dnx_assume"
+    parameters:
+      aws_role: DNXAccess
+      aws_account_id: 720160341120
+
+config:
+  check_modules: false
+
+common:
+  vpn_cidr: "10.37.0.0/16"
+
+workspaces:
+  # #######################################
+  # # Development Environment Definitions #
+  # #######################################
+  # nonprod-sa-east-1-dev:
+  #   aws:
+  #     account_id: 571420220243
+  #     role: InfraDeployAccess
+  #   environment_name: dev
+  #   region: sa-east-1
+  #   hosted_zone: dev.cloud.galaxpay.com.br
+  #   account_name: nonprod
+
+  # ###################################
+  # # Sandbox Environment Definitions #
+  # ###################################
+
+  # nonprod-sa-east-1-sandbox:
+  #   aws:
+  #     account_id: 571420220243
+  #     role: InfraDeployAccess
+  #   environment_name: sandbox
+  #   hosted_zone: sandbox.cloud.galaxpay.com.br
+  #   region: sa-east-1
+  #   account_name: nonprod
+
+  ######################################
+  # Production Environment Definitions #
+  ######################################
+
+  prod-sa-east-1-prod:
+    account_name: prod
+    aws:
+      account_id: 356401838153
+      role: InfraDeployAccess
+    environment_name: prod
+    region: sa-east-1
+    lambda:
+      enabled: true
+      env: prod
